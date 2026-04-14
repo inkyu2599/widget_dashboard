@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>대시보드 레이아웃 설정을 사용자별로 저장하는 Custom Object</description>
+    <label>CM Dashboard Layout</label>
+    <pluralLabel>CM Dashboard Layouts</pluralLabel>
+    <nameField>
+        <label>Layout Name</label>
+        <type>Text</type>
+    </nameField>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <sharingModel>Private</sharingModel>
+</CustomObject>

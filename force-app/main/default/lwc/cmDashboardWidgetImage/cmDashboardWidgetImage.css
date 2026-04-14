@@ -1,0 +1,26 @@
+/* cmDashboardWidgetImage.css */
+.image-widget-root {
+    width: 100%;
+}
+.image-widget__title {
+    padding: 0.5rem 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--slds-g-color-neutral-base-80, #dddbda);
+    background: rgba(0,0,0,0.03);
+}
+.image-widget__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.image-widget__empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--slds-g-color-neutral-base-50, #706e6b);
+    padding: 1rem;
+}

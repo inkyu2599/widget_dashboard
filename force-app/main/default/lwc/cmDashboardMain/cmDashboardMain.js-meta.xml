@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <isExposed>true</isExposed>
+    <description>
+        [영업포털-대시보드] 홈 화면 메인 커스텀 대시보드.
+        텍스트·이미지·LWC 컴포넌트 위젯을 자유 배치하고 크기를 드래그로 조절할 수 있습니다.
+    </description>
+    <targets>
+        <target>lightning__HomePage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__HomePage">
+            <property name="title" type="String" label="대시보드 제목" default="내 대시보드"/>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage">
+            <property name="title" type="String" label="대시보드 제목" default="내 대시보드"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

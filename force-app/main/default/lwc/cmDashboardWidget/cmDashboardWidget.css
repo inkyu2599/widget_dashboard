@@ -1,0 +1,30 @@
+/* cmDashboardWidget.css */
+
+:host {
+    display: contents; /* grid-item 으로 작동하도록 */
+}
+
+/* ── 위젯 래퍼 ─────────────────────────────────────────────────── */
+.widget-wrapper {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid var(--slds-g-color-neutral-base-80, #dddbda);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+    min-height: 80px;
+    box-sizing: border-box;
+}
+
+.widget-wrapper:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.13);
+}
+
+/* ── 콘텐츠 영역 ───────────────────────────────────────────────── */
+.widget-content {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+}

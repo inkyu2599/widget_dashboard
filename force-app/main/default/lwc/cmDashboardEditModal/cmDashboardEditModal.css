@@ -1,0 +1,258 @@
+/*
+ * cmDashboardEditModal.css
+ * SLDS 기반 최소한의 커스텀 스타일만 포함
+ * SLDS 유틸리티 클래스로 처리 불가능한 레이아웃/그리드 전용
+ */
+
+/* ── 편집 모달 전체 레이아웃 오버라이드 ── */
+.edit-modal__container {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+}
+
+.edit-modal__header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-shrink: 0;
+}
+
+.edit-modal__body {
+    display: flex !important;
+    flex: 1 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    max-height: none !important;
+}
+
+/* ── 캔버스 패널 ── */
+.edit-modal__canvas-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-right: 1px solid var(--slds-g-color-border-base-1, #dddbda);
+}
+
+.edit-modal__panel-header {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.edit-modal__canvas-scroll {
+    flex: 1;
+    overflow: auto;
+    padding: var(--lwc-spacingSmall, 0.75rem);
+    min-height: 0;
+}
+
+/* ── 팔레트 패널 ── */
+.edit-modal__palette-panel {
+    width: 288px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.edit-modal__palette-scroll {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* ── CSS Grid 캔버스 ── */
+.canvas-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: minmax(72px, auto);
+    gap: var(--lwc-spacingXSmall, 0.5rem);
+    min-height: 240px;
+    background: var(--slds-g-color-neutral-base-100, #ffffff);
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+    padding: var(--lwc-spacingXSmall, 0.5rem);
+    border: 2px dashed transparent;
+    transition: border-color 0.2s, background-color 0.2s;
+    position: relative;
+}
+
+.canvas-grid--drag-over {
+    border-color: var(--slds-g-color-brand-base-40, #0176d3);
+    background-color: var(--slds-g-color-brand-base-95, #f3f2ff);
+}
+
+/* 그리드 컬럼 가이드 (드래그 중 표시) */
+.canvas-grid__guide-col {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: rgba(1, 118, 211, 0.04);
+    border-left: 1px dashed rgba(1, 118, 211, 0.15);
+    pointer-events: none;
+}
+
+/* 드롭 프리뷰 */
+.canvas-grid__drop-preview {
+    position: absolute;
+    background: rgba(1, 118, 211, 0.12);
+    border: 2px solid var(--slds-g-color-brand-base-40, #0176d3);
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+    pointer-events: none;
+    transition: all 0.08s ease;
+    z-index: 1;
+}
+
+/* ── 위젯 카드 ── */
+.widget-card {
+    background: var(--slds-g-color-neutral-base-100, #ffffff);
+    border: 1px solid var(--slds-g-color-border-base-1, #dddbda);
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: grab;
+    position: relative;
+    transition: box-shadow 0.15s, border-color 0.15s;
+    min-height: 72px;
+}
+
+.widget-card:hover {
+    border-color: var(--slds-g-color-brand-base-40, #0176d3);
+    box-shadow: var(--lwc-shadowDropShadow, 0 2px 8px rgba(0,0,0,0.12));
+}
+
+.widget-card--dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+    box-shadow: var(--lwc-shadowDropShadow, 0 4px 16px rgba(0,0,0,0.2));
+}
+
+.widget-card--drop-target {
+    border-color: var(--slds-g-color-brand-base-40, #0176d3);
+    background-color: var(--slds-g-color-brand-base-95, #f0f7ff);
+}
+
+.widget-card__header {
+    padding: var(--lwc-spacingXXSmall, 0.25rem) var(--lwc-spacingXSmall, 0.5rem);
+    border-bottom: 1px solid var(--slds-g-color-border-base-1, #dddbda);
+    background: var(--slds-g-color-neutral-base-95, #f3f2ff);
+    flex-shrink: 0;
+    min-height: 32px;
+}
+
+.widget-card__preview {
+    flex: 1;
+    padding: var(--lwc-spacingXSmall, 0.5rem);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.widget-card__resize-handle {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: se-resize;
+    border-radius: 3px;
+    color: var(--slds-g-color-neutral-base-50, #706e6b);
+    transition: color 0.1s, background-color 0.1s;
+    z-index: 2;
+}
+
+.widget-card__resize-handle:hover {
+    color: var(--slds-g-color-brand-base-40, #0176d3);
+    background-color: var(--slds-g-color-brand-base-95, #f0f7ff);
+}
+
+/* 타입 배지 색상 */
+.widget-badge--text      { background-color: var(--slds-g-color-brand-base-40, #0176d3);  }
+.widget-badge--image     { background-color: var(--slds-g-color-success-base-40, #2e844a); }
+.widget-badge--component { background-color: var(--slds-g-color-warning-base-40, #747474); }
+
+/* ── 미리보기 영역 ── */
+.widget-preview__text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.5;
+    width: 100%;
+    align-self: flex-start;
+}
+
+.widget-preview__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--lwc-borderRadiusSmall, 0.125rem);
+}
+
+.widget-preview__placeholder,
+.widget-preview__component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--lwc-spacingXXSmall, 0.25rem);
+    height: 100%;
+    width: 100%;
+    background: var(--slds-g-color-neutral-base-95, #f3f2ff);
+    border-radius: var(--lwc-borderRadiusSmall, 0.125rem);
+    text-align: center;
+}
+
+/* ── 캔버스 빈 상태 ── */
+.canvas-empty {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--lwc-spacingXxLarge, 3rem);
+    color: var(--slds-g-color-neutral-base-50, #706e6b);
+}
+
+/* ── 팔레트 아이템 ── */
+.palette-item {
+    cursor: grab;
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+    border-left: 3px solid transparent;
+    transition: background-color 0.1s, border-left-color 0.1s;
+    user-select: none;
+    margin-bottom: 2px;
+}
+
+.palette-item:hover {
+    background-color: var(--slds-g-color-brand-base-95, #f0f7ff);
+    border-left-color: var(--slds-g-color-brand-base-40, #0176d3);
+}
+
+.palette-item--component:hover {
+    background-color: var(--slds-g-color-success-base-95, #f3fff3);
+    border-left-color: var(--slds-g-color-success-base-40, #2e844a);
+}
+
+.palette-item:active { cursor: grabbing; }
+
+.palette-item__icon {
+    font-size: 1.5rem;
+    display: block;
+    width: 32px;
+    text-align: center;
+}
+
+.palette-item__drag-grip {
+    color: var(--slds-g-color-neutral-base-70, #b0adab);
+}
+

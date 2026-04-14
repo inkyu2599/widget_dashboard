@@ -1,0 +1,36 @@
+.table-widget {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.table-container {
+    flex: 1;
+    overflow: auto;
+}
+
+.table-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 0.5rem;
+    color: #706e6b;
+    padding: 1rem;
+}
+
+.table-state--error {
+    color: #c23934;
+}
+
+.state-text {
+    font-size: 0.75rem;
+    text-align: center;
+    margin: 0;
+}
+
+.placeholder-icon {
+    opacity: 0.4;
+}

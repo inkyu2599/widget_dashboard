@@ -1,0 +1,14 @@
+/* cmDashboardWidgetComponent.css */
+.comp-widget-root { width:100%; height:100%; display:flex; align-items:stretch; }
+c-cm-dashboard-sample-sales-kpi,
+c-cm-dashboard-sample-pipeline,
+c-cm-dashboard-sample-activity { width:100%; }
+.comp-widget__placeholder {
+    flex:1; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; padding:1rem; text-align:center;
+    background:linear-gradient(135deg,#f8f9fb 0%,#eef1f6 100%);
+    gap:0.4rem;
+}
+.comp-widget__placeholder-icon { font-size:2rem; }
+.comp-widget__placeholder-name { font-size:0.75rem; font-weight:700; color:#0176d3; }
+.comp-widget__placeholder-hint { font-size:0.68rem; color:#aaa; }

@@ -1,0 +1,291 @@
+<!--************************************************************************************
+ * Component  : cmDashboardWidgetSettings
+ * Description: 위젯 설정 팝업 모달
+ *              새 위젯 타입 추가 시 이 파일에 타입 전용 섹션을 추가합니다.
+ ************************************************************************************-->
+<template>
+    <section role="dialog" aria-modal="true" aria-label="위젯 설정"
+             class="slds-modal slds-fade-in-open settings-modal">
+        <div class="slds-modal__container">
+
+            <header class="slds-modal__header">
+                <lightning-button-icon
+                    class="slds-modal__close"
+                    alternative-text="닫기"
+                    icon-name="utility:close"
+                    icon-class="slds-button__icon_large"
+                    variant="bare-inverse"
+                    onclick={handleCancel}>
+                </lightning-button-icon>
+                <h2 class="slds-modal__title">위젯 설정</h2>
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium">
+
+                <!-- 공통: 제목 -->
+                <div class="slds-form-element slds-m-bottom_small">
+                    <label class="slds-form-element__label" for="st-title">
+                        <abbr class="slds-required" title="필수">*</abbr>제목
+                    </label>
+                    <div class="slds-form-element__control">
+                        <input id="st-title" type="text" class="slds-input"
+                               value={draft.title}
+                               data-field="title"
+                               oninput={handleFieldChange} />
+                    </div>
+                </div>
+
+                <!-- 공통: 크기 -->
+                <div class="slds-grid slds-gutters slds-m-bottom_small">
+                    <div class="slds-col">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="st-col">열 너비 (1–12)</label>
+                            <div class="slds-form-element__control">
+                                <input id="st-col" type="number" class="slds-input"
+                                       min="1" max="12"
+                                       value={draft.colSpan}
+                                       data-field="colSpan"
+                                       oninput={handleFieldChange} />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col">
+                        <div class="slds-form-element">
+                            <label class="slds-form-element__label" for="st-row">행 높이</label>
+                            <div class="slds-form-element__control">
+                                <input id="st-row" type="number" class="slds-input"
+                                       min="1" max="20"
+                                       value={draft.rowSpan}
+                                       data-field="rowSpan"
+                                       oninput={handleFieldChange} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEXT 전용 -->
+                <template lwc:if={isText}>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-content">내용</label>
+                        <div class="slds-form-element__control">
+                            <textarea id="st-content" class="slds-textarea"
+                                      data-field="content"
+                                      oninput={handleFieldChange}>{draft.content}</textarea>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-m-bottom_small">
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="st-bg">배경색</label>
+                                <div class="slds-form-element__control">
+                                    <input id="st-bg" type="color" class="slds-input settings-color-input"
+                                           value={draft.backgroundColor}
+                                           data-field="backgroundColor"
+                                           oninput={handleFieldChange} />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="st-fg">글자색</label>
+                                <div class="slds-form-element__control">
+                                    <input id="st-fg" type="color" class="slds-input settings-color-input"
+                                           value={draft.textColor}
+                                           data-field="textColor"
+                                           oninput={handleFieldChange} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- IMAGE 전용 -->
+                <template lwc:if={isImage}>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-url">이미지 URL</label>
+                        <div class="slds-form-element__control">
+                            <input id="st-url" type="url" class="slds-input"
+                                   placeholder="https://..."
+                                   value={draft.imageUrl}
+                                   data-field="imageUrl"
+                                   oninput={handleFieldChange} />
+                        </div>
+                    </div>
+                </template>
+
+                <!-- COMPONENT 전용 -->
+                <template lwc:if={isComponent}>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-comp">컴포넌트</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select id="st-comp" class="slds-select"
+                                        data-field="componentName"
+                                        onchange={handleFieldChange}>
+                                    <template for:each={availableComponentOptions} for:item="opt">
+                                        <option key={opt.value} value={opt.value}
+                                                selected={opt.isSelected}>{opt.label}</option>
+                                    </template>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- REPORT 전용 -->
+                <template lwc:if={isReport}>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-report-id">리포트 ID</label>
+                        <div class="slds-form-element__control">
+                            <input id="st-report-id" type="text" class="slds-input"
+                                   placeholder="00O000000000000"
+                                   value={draft.reportId}
+                                   data-field="reportId"
+                                   oninput={handleFieldChange} />
+                        </div>
+                        <p class="slds-form-element__help">Salesforce 리포트 ID (15자 또는 18자). 해당 리포트에 차트가 포함되어야 합니다.</p>
+                    </div>
+                </template>
+
+                <!-- CHART 전용 -->
+                <template lwc:if={isChart}>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-chart-obj">오브젝트 API명</label>
+                        <div class="slds-form-element__control">
+                            <input id="st-chart-obj" type="text" class="slds-input"
+                                   placeholder="Account"
+                                   value={draft.chartSObject}
+                                   data-field="chartSObject"
+                                   oninput={handleFieldChange} />
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-chart-group">그룹 기준 필드</label>
+                        <div class="slds-form-element__control">
+                            <input id="st-chart-group" type="text" class="slds-input"
+                                   placeholder="Industry"
+                                   value={draft.chartGroupBy}
+                                   data-field="chartGroupBy"
+                                   oninput={handleFieldChange} />
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-m-bottom_small">
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="st-chart-agg">집계 방식</label>
+                                <div class="slds-form-element__control">
+                                    <div class="slds-select_container">
+                                        <select id="st-chart-agg" class="slds-select"
+                                                data-field="chartAggregation"
+                                                onchange={handleFieldChange}>
+                                            <option value="COUNT" selected={isAggCount}>COUNT</option>
+                                            <option value="SUM"   selected={isAggSum}>SUM</option>
+                                            <option value="AVG"   selected={isAggAvg}>AVG</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="st-chart-val">집계 대상 필드</label>
+                                <div class="slds-form-element__control">
+                                    <input id="st-chart-val" type="text" class="slds-input"
+                                           placeholder="Amount (SUM/AVG 시)"
+                                           value={draft.chartValueField}
+                                           data-field="chartValueField"
+                                           oninput={handleFieldChange} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-chart-type">차트 타입</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select id="st-chart-type" class="slds-select"
+                                        data-field="chartType"
+                                        onchange={handleFieldChange}>
+                                    <option value="bar"       selected={isChartBar}>막대 (Bar)</option>
+                                    <option value="line"      selected={isChartLine}>선형 (Line)</option>
+                                    <option value="pie"       selected={isChartPie}>원형 (Pie)</option>
+                                    <option value="doughnut"  selected={isChartDoughnut}>도넛 (Doughnut)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- TABLE 전용 -->
+                <template lwc:if={isTable}>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-tbl-obj">오브젝트 API명</label>
+                        <div class="slds-form-element__control">
+                            <input id="st-tbl-obj" type="text" class="slds-input"
+                                   placeholder="Contact"
+                                   value={draft.tableSObject}
+                                   data-field="tableSObject"
+                                   oninput={handleFieldChange} />
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-tbl-fields">표시 필드 (콤마 구분)</label>
+                        <div class="slds-form-element__control">
+                            <input id="st-tbl-fields" type="text" class="slds-input"
+                                   placeholder="Name, Email, Phone"
+                                   value={draft.tableFields}
+                                   data-field="tableFields"
+                                   oninput={handleFieldChange} />
+                        </div>
+                    </div>
+                    <div class="slds-form-element slds-m-bottom_small">
+                        <label class="slds-form-element__label" for="st-tbl-where">WHERE 조건 (선택)</label>
+                        <div class="slds-form-element__control">
+                            <input id="st-tbl-where" type="text" class="slds-input"
+                                   placeholder="IsActive__c = true"
+                                   value={draft.tableWhereClause}
+                                   data-field="tableWhereClause"
+                                   oninput={handleFieldChange} />
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-m-bottom_small">
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="st-tbl-order">정렬 필드 (선택)</label>
+                                <div class="slds-form-element__control">
+                                    <input id="st-tbl-order" type="text" class="slds-input"
+                                           placeholder="Name ASC"
+                                           value={draft.tableOrderBy}
+                                           data-field="tableOrderBy"
+                                           oninput={handleFieldChange} />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="st-tbl-limit">최대 행 수</label>
+                                <div class="slds-form-element__control">
+                                    <input id="st-tbl-limit" type="number" class="slds-input"
+                                           min="1" max="200"
+                                           value={draft.tableLimit}
+                                           data-field="tableLimit"
+                                           oninput={handleFieldChange} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+            <footer class="slds-modal__footer">
+                <lightning-button label="취소" onclick={handleCancel}
+                    class="slds-m-right_x-small"></lightning-button>
+                <lightning-button label="저장" variant="brand"
+                    onclick={handleSave}></lightning-button>
+            </footer>
+
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open settings-backdrop"></div>
+</template>

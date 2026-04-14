@@ -1,0 +1,12 @@
+/* cmDashboardWidgetSettings.css */
+
+/* 설정 모달이 편집 모달 위에 표시되도록 z-index 조정 */
+.settings-modal    { z-index: 9001 !important; }
+.settings-backdrop { z-index: 9000 !important; }
+
+/* 컬러 인풋 높이 맞춤 */
+.settings-color-input {
+    height: 2rem !important;
+    padding: 0.1rem 0.25rem !important;
+    cursor: pointer;
+}

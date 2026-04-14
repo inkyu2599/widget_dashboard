@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>대시보드에서 사용 가능한 LWC 컴포넌트 목록을 관리하는 Custom Metadata Type</description>
+    <label>CM Dashboard Component</label>
+    <pluralLabel>CM Dashboard Components</pluralLabel>
+    <fields>
+        <fullName>ComponentName__c</fullName>
+        <description>LWC 컴포넌트의 API 이름 (예: c-my-component)</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Component Name</label>
+        <length>255</length>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>컴포넌트 설명 (위젯 선택 시 표시)</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Description</label>
+        <length>1000</length>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Category__c</fullName>
+        <description>컴포넌트 카테고리 (영업, 마케팅, 공통 등)</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Category</label>
+        <length>100</length>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SortOrder__c</fullName>
+        <description>목록 표시 순서</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Sort Order</label>
+        <precision>5</precision>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsActive__c</fullName>
+        <description>대시보드에서 사용 가능 여부</description>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Is Active</label>
+        <type>Checkbox</type>
+        <defaultValue>true</defaultValue>
+    </fields>
+</CustomObject>

@@ -1,0 +1,42 @@
+.chart-widget {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+
+.chart-container {
+    flex: 1;
+    position: relative;
+    min-height: 0;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.chart-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 0.5rem;
+    color: #706e6b;
+}
+
+.chart-state--error {
+    color: #c23934;
+}
+
+.state-text {
+    font-size: 0.75rem;
+    text-align: center;
+    margin: 0;
+}
+
+.placeholder-icon {
+    opacity: 0.4;
+}

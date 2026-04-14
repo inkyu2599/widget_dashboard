@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>63.0</apiVersion>
+    <isExposed>false</isExposed>
+    <description>대시보드 텍스트 위젯 - 제목 및 리치텍스트 본문 표시</description>
+</LightningComponentBundle>

@@ -1,0 +1,32 @@
+<!--************************************************************************************
+ * Component  : cmDashboardWidget
+ * Description: [영업포털-대시보드] 개별 위젯 컨테이너 (뷰 모드 전용)
+ *              새 위젯 타입 추가 시 아래에 lwc:if 분기를 추가합니다.
+ ************************************************************************************-->
+<template>
+    <div class="widget-wrapper" style={widgetStyle} data-widget-id={widget.widgetId}>
+
+        <!-- 위젯 콘텐츠 영역 -->
+        <div class="widget-content" style={contentStyle}>
+            <template lwc:if={isTextWidget}>
+                <c-cm-dashboard-widget-text widget={widget} mode={mode}></c-cm-dashboard-widget-text>
+            </template>
+            <template lwc:if={isImageWidget}>
+                <c-cm-dashboard-widget-image widget={widget} mode={mode}></c-cm-dashboard-widget-image>
+            </template>
+            <template lwc:if={isComponentWidget}>
+                <c-cm-dashboard-widget-component widget={widget} mode={mode}></c-cm-dashboard-widget-component>
+            </template>
+            <template lwc:if={isReportWidget}>
+                <c-cm-dashboard-widget-report widget={widget} mode={mode}></c-cm-dashboard-widget-report>
+            </template>
+            <template lwc:if={isChartWidget}>
+                <c-cm-dashboard-widget-chart widget={widget} mode={mode}></c-cm-dashboard-widget-chart>
+            </template>
+            <template lwc:if={isTableWidget}>
+                <c-cm-dashboard-widget-table widget={widget} mode={mode}></c-cm-dashboard-widget-table>
+            </template>
+        </div>
+
+    </div>
+</template>

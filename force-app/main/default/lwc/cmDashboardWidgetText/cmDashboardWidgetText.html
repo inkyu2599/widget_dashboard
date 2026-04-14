@@ -1,0 +1,19 @@
+<!--************************************************************************************
+ * Component  : cmDashboardWidgetText
+ * Author     : Dashboard Team
+ * Date       : 2026-03-06
+ * Description: [영업포털-대시보드] 텍스트 위젯
+ *              제목 + 본문 내용을 자유롭게 표시
+ ************************************************************************************-->
+<template>
+    <div class="text-widget-root" style={rootStyle}>
+        <template lwc:if={widget.title}>
+            <h2 class="text-widget__title" style={titleStyle}>{widget.title}</h2>
+        </template>
+        <div class="text-widget__body" style={bodyStyle}>
+            <!-- rich text content (HTML 허용) -->
+            <!-- eslint-disable-next-line @lwc/lwc/no-inner-html -->
+            <lightning-formatted-rich-text value={widget.content}></lightning-formatted-rich-text>
+        </div>
+    </div>
+</template>

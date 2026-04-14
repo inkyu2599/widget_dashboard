@@ -1,0 +1,28 @@
+<!--************************************************************************************
+ * Component  : cmDashboardWidgetComponent
+ * Description: [영업포털-대시보드] LWC 컴포넌트 위젯 - 등록된 컴포넌트 렌더링
+ ************************************************************************************-->
+<template>
+    <div class="comp-widget-root">
+        <!-- 예시: 영업 KPI -->
+        <template lwc:if={isSalesKpi}>
+            <c-cm-dashboard-sample-sales-kpi></c-cm-dashboard-sample-sales-kpi>
+        </template>
+        <!-- 예시: 파이프라인 -->
+        <template lwc:if={isPipeline}>
+            <c-cm-dashboard-sample-pipeline></c-cm-dashboard-sample-pipeline>
+        </template>
+        <!-- 예시: 활동 피드 -->
+        <template lwc:if={isActivity}>
+            <c-cm-dashboard-sample-activity></c-cm-dashboard-sample-activity>
+        </template>
+        <!-- 미등록 컴포넌트 플레이스홀더 -->
+        <template lwc:if={isUnknown}>
+            <div class="comp-widget__placeholder">
+                <span class="comp-widget__placeholder-icon">⚙️</span>
+                <p class="comp-widget__placeholder-name">{widget.componentName}</p>
+                <span class="comp-widget__placeholder-hint">컴포넌트가 여기에 렌더링됩니다</span>
+            </div>
+        </template>
+    </div>
+</template>
