@@ -1,0 +1,99 @@
+<template>
+    <section class="modal-backdrop">
+        <div class="modal-container">
+
+            <!-- 헤더 -->
+            <header class="modal-header">
+                <h2 class="modal-title">대시보드 편집</h2>
+                <div class="header-actions">
+                    <div class="add-widget-group">
+                        <lightning-combobox
+                            label=""
+                            value={newWidgetType}
+                            options={typeOptions}
+                            placeholder="위젯 타입 선택"
+                            onchange={handleNewTypeChange}
+                            class="type-combo">
+                        </lightning-combobox>
+                        <lightning-button label="위젯 추가" icon-name="utility:add"
+                            variant="neutral" onclick={handleAddWidget}></lightning-button>
+                    </div>
+                    <lightning-button label="취소" onclick={handleCancel}></lightning-button>
+                    <lightning-button label="저장" variant="brand" onclick={handleSave}></lightning-button>
+                </div>
+            </header>
+
+            <!-- 바디 -->
+            <div class="modal-body">
+                <!-- 캔버스 -->
+                <div class="canvas-wrapper" onclick={handleCanvasClick}>
+                    <div class="canvas" style={canvasStyle}>
+                        <template for:each={canvasWidgets} for:item="widget">
+                            <div key={widget.widgetId}
+                                class={widget.cardClass}
+                                style={widget.pixelStyle}
+                                data-widget-id={widget.widgetId}>
+
+                                <!-- 드래그 바 (헤더) -->
+                                <div class="widget-drag-bar"
+                                    data-widget-id={widget.widgetId}
+                                    onmousedown={handleDragStart}>
+                                    <span class="drag-grip">&#8942;&#8942;</span>
+                                    <span class="widget-type-badge">{widget.widgetType}</span>
+                                    <span class="widget-title-text">{widget.title}</span>
+                                    <div class="widget-header-actions">
+                                        <button class="action-btn"
+                                            data-widget-id={widget.widgetId}
+                                            onmousedown={stopPropagation}
+                                            onclick={handleSettingsClick}
+                                            title="설정">&#9881;</button>
+                                        <button class="action-btn action-btn--danger"
+                                            data-widget-id={widget.widgetId}
+                                            onmousedown={stopPropagation}
+                                            onclick={handleDeleteWidget}
+                                            title="삭제">&#10005;</button>
+                                    </div>
+                                </div>
+
+                                <!-- 위젯 내용 -->
+                                <div class="widget-body">
+                                    <c-cm-db-cell widget={widget}></c-cm-db-cell>
+                                </div>
+
+                                <!-- 리사이즈 핸들 (우하단) -->
+                                <div class="resize-se"
+                                    data-widget-id={widget.widgetId}
+                                    onmousedown={handleResizeStart}>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template lwc:if={isEmpty}>
+                            <div class="canvas-empty">
+                                <p>위에서 위젯을 추가하세요</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- 설정 패널 -->
+                <div class="settings-panel-container">
+                    <template lwc:if={selectedWidget}>
+                        <c-cm-db-widget-settings
+                            widget={selectedWidget}
+                            onapply={handleWidgetApply}
+                            oncancel={handleWidgetCancel}>
+                        </c-cm-db-widget-settings>
+                    </template>
+                    <template lwc:else>
+                        <div class="settings-empty">
+                            <lightning-icon icon-name="utility:settings" size="large"
+                                class="settings-empty-icon"></lightning-icon>
+                            <p>위젯 헤더의 ⚙ 버튼을 클릭하면 설정할 수 있습니다</p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <description>CM 대시보드 앱 - 커스텀 위젯 기반 대시보드 빌더</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isServiceCloudConsole>false</isServiceCloudConsole>
+    <label>CM Dashboard</label>
+    <navType>Standard</navType>
+    <tabs>CM_DashboardApp</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar/>
+</CustomApplication>

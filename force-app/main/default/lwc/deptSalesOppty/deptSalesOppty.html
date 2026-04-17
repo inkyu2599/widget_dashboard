@@ -1,0 +1,32 @@
+<template>
+    <div class="oppty-widget">
+        <template lwc:if={isLoading}>
+            <div class="widget-state">
+                <lightning-spinner alternative-text="로딩 중" size="small"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:elseif={errorMsg}>
+            <div class="widget-state widget-state--error">
+                <lightning-icon icon-name="utility:error" size="small" variant="error"></lightning-icon>
+                <p class="state-text">{errorMsg}</p>
+            </div>
+        </template>
+        <template lwc:elseif={isEmpty}>
+            <div class="widget-state">
+                <lightning-icon icon-name="utility:opportunity" size="medium" class="placeholder-icon"></lightning-icon>
+                <p class="state-text">영업기회가 없습니다.</p>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="table-container">
+                <lightning-datatable
+                    key-field="_idx"
+                    data={rows}
+                    columns={columns}
+                    hide-checkbox-column
+                    resize-column-disabled>
+                </lightning-datatable>
+            </div>
+        </template>
+    </div>
+</template>

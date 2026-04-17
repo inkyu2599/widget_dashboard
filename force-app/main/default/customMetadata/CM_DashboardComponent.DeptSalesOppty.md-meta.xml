@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>영업기회 현황</label>
+    <protected>false</protected>
+    <values>
+        <field>ComponentName__c</field>
+        <value xsi:type="xsd:string">c-dept-sales-oppty</value>
+    </values>
+    <values>
+        <field>Category__c</field>
+        <value xsi:type="xsd:string">영업</value>
+    </values>
+    <values>
+        <field>Description__c</field>
+        <value xsi:type="xsd:string">영업기회 목록을 표시합니다. componentConfig로 stage, closeYear, limit 필터 설정 가능.</value>
+    </values>
+    <values>
+        <field>SortOrder__c</field>
+        <value xsi:type="xsd:double">10</value>
+    </values>
+    <values>
+        <field>IsActive__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

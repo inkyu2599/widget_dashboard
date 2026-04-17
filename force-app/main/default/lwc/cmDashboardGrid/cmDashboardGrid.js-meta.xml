@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
-    <isExposed>false</isExposed>
-    <description>대시보드 CSS Grid 레이아웃 컨테이너 - 위젯 자유 배치 및 크기 조절 지원</description>
-</LightningComponentBundle>

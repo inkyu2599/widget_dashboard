@@ -1,0 +1,64 @@
+<template>
+    <div class="view-root">
+        <template lwc:if={isLoading}>
+            <div class="loading-state">
+                <lightning-spinner alternative-text="로딩 중" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template lwc:elseif={hasError}>
+            <div class="error-state">
+                <lightning-icon icon-name="utility:error" size="small" variant="error"></lightning-icon>
+                <p>{errorMessage}</p>
+            </div>
+        </template>
+
+        <template lwc:else>
+            <div class="view-header">
+                <div class="view-header-left">
+                    <lightning-button-icon icon-name="utility:back" alternative-text="목록으로"
+                        onclick={handleBack}></lightning-button-icon>
+                    <h1 class="view-title">{dashboard.Name}</h1>
+                    <template lwc:if={dashboard.Description__c}>
+                        <span class="view-desc">{dashboard.Description__c}</span>
+                    </template>
+                    <template lwc:if={hasPersonalLayout}>
+                        <span class="personal-badge">개인화됨</span>
+                    </template>
+                </div>
+                <div class="view-header-right">
+                    <template lwc:if={hasPersonalLayout}>
+                        <lightning-button label="기본으로 되돌리기" icon-name="utility:undo"
+                            onclick={handleReset}></lightning-button>
+                    </template>
+                    <lightning-button label="위젯 편집" icon-name="utility:edit"
+                        onclick={handleEdit}></lightning-button>
+                </div>
+            </div>
+
+            <div class="view-body">
+                <template lwc:if={isEmpty}>
+                    <div class="empty-state">
+                        <lightning-icon icon-name="utility:dashboard" size="large" class="empty-icon"></lightning-icon>
+                        <p>편집 버튼을 눌러 위젯을 추가하세요</p>
+                    </div>
+                </template>
+                <div class="view-grid">
+                    <template for:each={widgetsWithStyle} for:item="w">
+                        <div key={w.widgetId} style={w.cellStyle} class="widget-cell">
+                            <c-cm-db-cell widget={w}></c-cm-db-cell>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <template lwc:if={isEditing}>
+            <c-cm-db-edit-modal
+                layout={layout}
+                onsave={handleSave}
+                oncancel={handleCancelEdit}>
+            </c-cm-db-edit-modal>
+        </template>
+    </div>
+</template>

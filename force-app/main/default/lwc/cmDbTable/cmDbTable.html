@@ -1,0 +1,31 @@
+<template>
+    <div class="table-widget">
+        <template lwc:if={isLoading}>
+            <div class="widget-state">
+                <lightning-spinner alternative-text="로딩 중" size="small"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:elseif={hasError}>
+            <div class="widget-state widget-state--error">
+                <lightning-icon icon-name="utility:error" size="small" variant="error"></lightning-icon>
+                <p class="state-text">{errorMessage}</p>
+            </div>
+        </template>
+        <template lwc:elseif={isConfigured}>
+            <div class="table-container">
+                <lightning-datatable
+                    key-field="__rowIndex"
+                    data={tableRows}
+                    columns={tableColumns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="widget-state">
+                <lightning-icon icon-name="utility:table" size="medium" class="placeholder-icon"></lightning-icon>
+                <p class="state-text">오브젝트와 필드를 설정하세요</p>
+            </div>
+        </template>
+    </div>
+</template>

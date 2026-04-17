@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cmd /c \"dir /b c:\\\\Users\\\\윤인규\\\\workspace\\\\DashboardDevOrg\\\\force-app\\\\main\\\\default\\\\lwc\")"
+      "Bash(cmd /c \"dir /b c:\\\\Users\\\\윤인규\\\\workspace\\\\DashboardDevOrg\\\\force-app\\\\main\\\\default\\\\lwc\")",
+      "Bash(sf project:*)"
     ]
   }
 }

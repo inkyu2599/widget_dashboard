@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
-    <isExposed>false</isExposed>
-    <description>대시보드 편집 모달 - 좌측 캔버스/우측 팔레트 드래그앤드롭 레이아웃 편집기</description>
-</LightningComponentBundle>

@@ -1,0 +1,65 @@
+<template>
+    <div class="app-root">
+        <!-- 대시보드 뷰 모드 -->
+        <template lwc:if={selectedId}>
+            <c-cm-dashboard-view
+                record-id={selectedId}
+                is-admin={isAdmin}
+                onback={handleBack}>
+            </c-cm-dashboard-view>
+        </template>
+
+        <!-- 목록 모드 -->
+        <template lwc:else>
+            <div class="app-header">
+                <h1 class="app-title">CM 대시보드</h1>
+                <template lwc:if={isAdmin}>
+                    <lightning-button label="새 대시보드" variant="brand"
+                        icon-name="utility:add" onclick={handleNew}></lightning-button>
+                </template>
+            </div>
+
+            <!-- 신규 생성 폼 (관리자만) -->
+            <template lwc:if={isCreating}>
+                <div class="create-form">
+                    <lightning-input label="대시보드 이름" value={newName}
+                        onchange={handleNameChange} placeholder="이름을 입력하세요"
+                        class="create-input"></lightning-input>
+                    <lightning-input label="설명 (선택)" value={newDesc}
+                        onchange={handleDescChange}></lightning-input>
+                    <div class="create-actions">
+                        <lightning-button label="취소" onclick={handleCancelNew}></lightning-button>
+                        <lightning-button label="생성" variant="brand"
+                            disabled={isCreateDisabled} onclick={handleCreate}></lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <!-- 목록 -->
+            <div class="app-body">
+                <template lwc:if={isLoading}>
+                    <lightning-spinner alternative-text="로딩 중" size="medium"></lightning-spinner>
+                </template>
+                <template lwc:elseif={hasDashboards}>
+                    <template for:each={dashboards} for:item="dash">
+                        <c-cm-dashboard-card
+                            key={dash.Id}
+                            dashboard={dash}
+                            is-admin={isAdmin}
+                            onselect={handleSelect}
+                            ondelete={handleDelete}
+                            onaudiencesave={handleAudienceSave}
+                            onpersonaldefault={handlePersonalDefault}>
+                        </c-cm-dashboard-card>
+                    </template>
+                </template>
+                <template lwc:else>
+                    <div class="empty-list">
+                        <lightning-icon icon-name="utility:dashboard" size="large" class="empty-icon"></lightning-icon>
+                        <p>표시할 대시보드가 없습니다.</p>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

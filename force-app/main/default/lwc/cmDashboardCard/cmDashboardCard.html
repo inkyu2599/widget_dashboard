@@ -1,0 +1,75 @@
+<template>
+    <div class="card">
+        <div class="card-main" onclick={handleClick}>
+            <div class="card-icon">
+                <lightning-icon icon-name="utility:dashboard" size="medium"></lightning-icon>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">{dashboard.Name}</h3>
+                <template lwc:if={dashboard.Description__c}>
+                    <p class="card-desc">{dashboard.Description__c}</p>
+                </template>
+                <p class="card-meta">최종 수정: {lastModified}</p>
+                <template lwc:if={hasAudience}>
+                    <p class="card-audience">{audienceLabel}</p>
+                </template>
+            </div>
+        </div>
+        <div class="card-actions">
+            <!-- 모든 사용자: 내 기본으로 설정 -->
+            <lightning-button-icon icon-name="utility:pinned" alternative-text="내 기본으로 설정"
+                size="small" variant="border-filled" title="내 기본으로 설정"
+                onclick={handleSetPersonalDefault}></lightning-button-icon>
+            <!-- 관리자 전용 -->
+            <template lwc:if={isAdmin}>
+                <lightning-button-icon icon-name="utility:groups" alternative-text="대상 설정"
+                    size="small" variant="border-filled" title="대상 설정"
+                    onclick={handleToggleAudience}></lightning-button-icon>
+                <lightning-button-icon icon-name="utility:delete" alternative-text="삭제"
+                    size="small" variant="border-filled"
+                    onclick={handleDelete}></lightning-button-icon>
+            </template>
+        </div>
+    </div>
+
+    <!-- 대상 설정 인라인 폼 (관리자만) -->
+    <template lwc:if={isAudienceOpen}>
+        <div class="audience-form">
+            <lightning-combobox
+                label="표시 대상"
+                value={audienceType}
+                options={audienceTypeOptions}
+                onchange={handleTypeChange}>
+            </lightning-combobox>
+
+            <template lwc:if={needsValue}>
+                <template lwc:if={isLoadingOptions}>
+                    <lightning-spinner size="small" alternative-text="로딩 중"></lightning-spinner>
+                </template>
+                <template lwc:else>
+                    <lightning-combobox
+                        label={valueLabel}
+                        value={audienceValue}
+                        options={valueOptions}
+                        onchange={handleValueChange}
+                        placeholder="선택하세요">
+                    </lightning-combobox>
+                </template>
+            </template>
+
+            <lightning-input
+                type="number"
+                label="우선순위 (낮을수록 우선)"
+                value={priority}
+                min="1"
+                max="999"
+                onchange={handlePriorityChange}>
+            </lightning-input>
+
+            <div class="audience-actions">
+                <lightning-button label="취소" onclick={handleCancelAudience}></lightning-button>
+                <lightning-button label="적용" variant="brand" onclick={handleApplyAudience}></lightning-button>
+            </div>
+        </div>
+    </template>
+</template>

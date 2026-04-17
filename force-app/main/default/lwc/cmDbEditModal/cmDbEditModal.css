@@ -1,0 +1,186 @@
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9000;
+    display: flex;
+    align-items: stretch;
+}
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #f3f2f2;
+    overflow: hidden;
+}
+
+/* ── 헤더 ── */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    background: #fff;
+    border-bottom: 1px solid #dddbda;
+    flex-shrink: 0;
+}
+.modal-title { font-size: 1.1rem; font-weight: 700; margin: 0; }
+.header-actions { display: flex; gap: 0.5rem; align-items: center; }
+.add-widget-group { display: flex; gap: 0.4rem; align-items: center; }
+.type-combo { min-width: 140px; }
+
+/* ── 바디 ── */
+.modal-body {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ── 캔버스 ── */
+.canvas-wrapper {
+    overflow: auto;
+    padding: 1rem;
+    background: #f3f2f2;
+}
+.canvas {
+    position: relative;
+    min-height: 400px;
+    /* 12컬럼 그리드 배경선 */
+    background-image:
+        linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: calc(100% / 12) 100px;
+    background-position: 0 0;
+    border: 1px solid #dddbda;
+    border-radius: 0.5rem;
+    background-color: #fff;
+}
+
+/* ── 위젯 카드 ── */
+.canvas-widget {
+    position: absolute;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #dddbda;
+    border-radius: 0.5rem;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: box-shadow 0.15s;
+    user-select: none;
+}
+.canvas-widget:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.14); }
+.canvas-widget--selected { border-color: #0176d3; border-width: 2px; box-shadow: 0 0 0 3px rgba(1,118,211,0.2); }
+
+/* ── 드래그 바 ── */
+.widget-drag-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    background: #fafaf9;
+    border-bottom: 1px solid #f3f2f2;
+    cursor: move;
+    flex-shrink: 0;
+    min-height: 28px;
+}
+.drag-grip {
+    font-size: 1rem;
+    color: #c9c7c5;
+    letter-spacing: -2px;
+    flex-shrink: 0;
+}
+.widget-type-badge {
+    font-size: 0.55rem;
+    font-weight: 700;
+    background: #0176d3;
+    color: #fff;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+}
+.widget-title-text {
+    flex: 1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #181818;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.widget-header-actions {
+    display: flex;
+    gap: 0.15rem;
+    flex-shrink: 0;
+}
+.action-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+    border: none;
+    border-radius: 0.2rem;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #706e6b;
+    padding: 0;
+}
+.action-btn:hover { background: #e5e5e5; color: #181818; }
+.action-btn--danger:hover { background: #fde8e8; color: #ba0517; }
+
+/* ── 위젯 본문 ── */
+.widget-body {
+    flex: 1;
+    overflow: hidden;
+    pointer-events: none; /* 드래그/리사이즈 방해 방지 */
+    min-height: 0;
+}
+
+/* ── 리사이즈 핸들 ── */
+.resize-se {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 14px;
+    height: 14px;
+    cursor: se-resize;
+    background: linear-gradient(135deg, transparent 50%, #c9c7c5 50%);
+    border-bottom-right-radius: 0.4rem;
+}
+.resize-se:hover { background: linear-gradient(135deg, transparent 50%, #0176d3 50%); }
+
+/* ── 빈 상태 ── */
+.canvas-empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #706e6b;
+    font-size: 0.85rem;
+    pointer-events: none;
+}
+
+/* ── 설정 패널 ── */
+.settings-panel-container {
+    border-left: 1px solid #dddbda;
+    background: #fff;
+    overflow-y: auto;
+}
+.settings-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 0.75rem;
+    color: #706e6b;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+}
+.settings-empty-icon { opacity: 0.35; }

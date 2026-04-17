@@ -1,0 +1,9 @@
+<template>
+    <div class="row-wrapper" style={rowStyle}>
+        <template for:each={row.widgets} for:item="widget">
+            <div key={widget.widgetId} class="row-cell">
+                <c-cm-db-cell widget={widget}></c-cm-db-cell>
+            </div>
+        </template>
+    </div>
+</template>

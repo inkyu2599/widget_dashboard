@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
-    <isExposed>false</isExposed>
-    <description>대시보드 차트 위젯 - 오브젝트 기반 집계 데이터를 Chart.js로 시각화</description>
-</LightningComponentBundle>

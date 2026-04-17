@@ -1,0 +1,85 @@
+<template>
+    <div class="settings-panel">
+        <h3 class="settings-title">위젯 설정</h3>
+
+        <!-- 타입 선택 -->
+        <lightning-combobox
+            label="위젯 타입"
+            value={draft.widgetType}
+            options={typeOptions}
+            onchange={handleTypeChange}>
+        </lightning-combobox>
+
+        <!-- 공통: 제목 -->
+        <lightning-input
+            label="제목"
+            value={draft.title}
+            data-field="title"
+            onchange={handleFieldChange}>
+        </lightning-input>
+
+        <!-- COMPONENT 설정 -->
+        <template lwc:if={isComponent}>
+            <lightning-combobox
+                label="컴포넌트"
+                value={draft.componentName}
+                options={componentOptions}
+                placeholder="컴포넌트 선택"
+                data-field="componentName"
+                onchange={handleFieldChange}>
+            </lightning-combobox>
+            <lightning-textarea
+                label="컴포넌트 설정 (JSON)"
+                value={componentConfigStr}
+                onchange={handleComponentConfigChange}
+                placeholder={configPlaceholder}
+                max-length="10000">
+            </lightning-textarea>
+        </template>
+
+        <!-- CHART 설정 -->
+        <template lwc:if={isChart}>
+            <lightning-combobox label="오브젝트" value={draft.chartSObject}
+                options={chartSObjectOptions} placeholder="오브젝트 선택"
+                disabled={chartSObjectDisabled}
+                onchange={handleChartSObjectChange}></lightning-combobox>
+            <lightning-input label="그룹 필드" value={draft.chartGroupBy}
+                data-field="chartGroupBy" onchange={handleFieldChange}
+                placeholder="예: Industry"></lightning-input>
+            <lightning-combobox label="집계 방식" value={draft.chartAggregation}
+                options={aggregationOptions} data-field="chartAggregation"
+                onchange={handleFieldChange}></lightning-combobox>
+            <template lwc:if={showValueField}>
+                <lightning-input label="집계 필드" value={draft.chartValueField}
+                    data-field="chartValueField" onchange={handleFieldChange}
+                    placeholder="예: Amount"></lightning-input>
+            </template>
+            <lightning-combobox label="차트 타입" value={draft.chartType}
+                options={chartTypeOptions} data-field="chartType"
+                onchange={handleFieldChange}></lightning-combobox>
+        </template>
+
+        <!-- TABLE 설정 -->
+        <template lwc:if={isTable}>
+            <lightning-combobox label="오브젝트" value={draft.tableSObject}
+                options={tableSObjectOptions} placeholder="오브젝트 선택"
+                disabled={tableSObjectDisabled}
+                data-field="tableSObject" onchange={handleFieldChange}></lightning-combobox>
+            <lightning-textarea label="필드 목록 (쉼표 구분)" value={draft.tableFields}
+                data-field="tableFields" onchange={handleFieldChange}
+                placeholder="예: Name,Email,Phone"></lightning-textarea>
+            <lightning-input label="WHERE 조건 (선택)" value={draft.tableWhereClause}
+                data-field="tableWhereClause" onchange={handleFieldChange}></lightning-input>
+            <lightning-input label="ORDER BY (선택)" value={draft.tableOrderBy}
+                data-field="tableOrderBy" onchange={handleFieldChange}></lightning-input>
+            <lightning-input type="number" label="최대 행 수" value={draft.tableLimit}
+                data-field="tableLimit" onchange={handleFieldChange}
+                min="1" max="200"></lightning-input>
+        </template>
+
+        <div class="settings-actions">
+            <lightning-button label="취소" onclick={handleCancel}></lightning-button>
+            <lightning-button label="적용" variant="brand" onclick={handleApply}></lightning-button>
+        </div>
+    </div>
+</template>

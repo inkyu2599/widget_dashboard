@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
-    <isExposed>false</isExposed>
-    <description>대시보드 개별 위젯 컨테이너 (TEXT/IMAGE/COMPONENT 타입 지원, 드래그 이동 및 크기 조절)</description>
-</LightningComponentBundle>

@@ -1,0 +1,18 @@
+<template>
+    <div class="cell-wrapper">
+        <template lwc:if={widget.title}>
+            <div class="cell-title">{widget.title}</div>
+        </template>
+        <div class="cell-content">
+            <template lwc:if={isChart}>
+                <c-cm-db-chart widget={widget}></c-cm-db-chart>
+            </template>
+            <template lwc:elseif={isTable}>
+                <c-cm-db-table widget={widget}></c-cm-db-table>
+            </template>
+            <template lwc:else>
+                <c-cm-db-component widget={widget}></c-cm-db-component>
+            </template>
+        </div>
+    </div>
+</template>

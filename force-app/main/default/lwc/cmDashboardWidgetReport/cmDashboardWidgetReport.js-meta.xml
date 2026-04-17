@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>63.0</apiVersion>
-    <isExposed>false</isExposed>
-    <description>대시보드 리포트 위젯 - Salesforce 리포트 차트 임베드</description>
-</LightningComponentBundle>

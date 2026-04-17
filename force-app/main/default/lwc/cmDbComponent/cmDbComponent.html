@@ -1,0 +1,39 @@
+<template>
+    <div class="component-widget">
+
+        <!-- ↓ 부서 컴포넌트: lwc:if (첫 번째) 또는 lwc:elseif (두 번째 이후)로 추가 -->
+        <template lwc:if={isDeptSalesOppty}>
+            <c-dept-sales-oppty widget={widget}></c-dept-sales-oppty>
+        </template>
+        <!-- 예시: 두 번째 컴포넌트 추가 시
+        <template lwc:elseif={isDeptHrSummary}>
+            <c-dept-hr-summary widget={widget}></c-dept-hr-summary>
+        </template>
+        -->
+
+        <!-- 레지스트리에 없는 컴포넌트 -->
+        <template lwc:elseif={isNotRegistered}>
+            <div class="widget-state widget-state--warn">
+                <lightning-icon icon-name="utility:warning" size="small" variant="warning"></lightning-icon>
+                <p class="state-text">미등록 컴포넌트</p>
+                <p class="state-hint">{widget.componentName}</p>
+            </div>
+        </template>
+        <!-- 등록은 됐지만 lwc:if 블록 누락 -->
+        <template lwc:elseif={isConfigured}>
+            <div class="widget-state widget-state--warn">
+                <lightning-icon icon-name="utility:warning" size="small" variant="warning"></lightning-icon>
+                <p class="state-text">렌더러 미구현</p>
+                <p class="state-hint">cmDbComponent.html에 lwc:if 블록을 추가하세요</p>
+            </div>
+        </template>
+        <!-- 컴포넌트 미선택 -->
+        <template lwc:else>
+            <div class="widget-state">
+                <lightning-icon icon-name="utility:component_customization" size="medium" class="placeholder-icon"></lightning-icon>
+                <p class="state-text">설정에서 컴포넌트를 선택하세요</p>
+            </div>
+        </template>
+
+    </div>
+</template>

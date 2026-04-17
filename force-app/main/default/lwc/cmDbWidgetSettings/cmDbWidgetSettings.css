@@ -1,0 +1,24 @@
+.settings-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: #fff;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.settings-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    color: #181818;
+}
+.settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid #f3f2f2;
+}

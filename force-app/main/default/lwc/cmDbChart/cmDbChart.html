@@ -1,0 +1,26 @@
+<template>
+    <div class="chart-widget">
+        <template lwc:if={isLoading}>
+            <div class="widget-state">
+                <lightning-spinner alternative-text="로딩 중" size="small"></lightning-spinner>
+            </div>
+        </template>
+        <template lwc:elseif={hasError}>
+            <div class="widget-state widget-state--error">
+                <lightning-icon icon-name="utility:error" size="small" variant="error"></lightning-icon>
+                <p class="state-text">{errorMessage}</p>
+            </div>
+        </template>
+        <template lwc:elseif={isConfigured}>
+            <div class="chart-container">
+                <canvas lwc:ref="canvas"></canvas>
+            </div>
+        </template>
+        <template lwc:else>
+            <div class="widget-state">
+                <lightning-icon icon-name="utility:chart" size="medium" class="placeholder-icon"></lightning-icon>
+                <p class="state-text">오브젝트와 그룹 필드를 설정하세요</p>
+            </div>
+        </template>
+    </div>
+</template>
